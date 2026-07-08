@@ -1,0 +1,20 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  lint-and-test:
+    name: Lint & Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Frontend and backend jobs will be added here
+      # once the respective stacks are initialised.
+      - name: Placeholder
+        run: echo "CI pipeline ready — add frontend and backend steps."

@@ -1,0 +1,73 @@
+# ─── OS ──────────────────────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ─── Editors / IDEs ──────────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.iml
+
+# ─── Environment & Secrets ───────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+
+# ─── Frontend (React / Node) ──────────────────────────────────────────────────
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.next/
+frontend/out/
+frontend/.turbo/
+frontend/coverage/
+frontend/.eslintcache
+frontend/*.local
+
+# ─── Backend (Java / Spring Boot) ────────────────────────────────────────────
+backend/target/
+backend/.gradle/
+backend/build/
+backend/out/
+backend/*.class
+backend/*.jar
+backend/*.war
+backend/*.ear
+backend/logs/
+backend/log/
+*.log
+
+# ─── Docker ──────────────────────────────────────────────────────────────────
+docker/volumes/
+
+# ─── Dependency lock artifacts ───────────────────────────────────────────────
+*.lock
+!package-lock.json
+!yarn.lock
+!pnpm-lock.yaml
+
+# ─── Test & Coverage ─────────────────────────────────────────────────────────
+coverage/
+*.lcov
+.nyc_output/
+
+# ─── Misc ────────────────────────────────────────────────────────────────────
+*.tmp
+*.bak
+*.orig
+tmp/
+temp/
