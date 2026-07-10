@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: velora_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: velora
+      POSTGRES_PASSWORD: velora
+      POSTGRES_DB: velora_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U velora -d velora_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
