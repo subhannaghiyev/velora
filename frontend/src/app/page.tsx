@@ -1,3 +1,9 @@
+import { MainLayout } from '@/components/layout/MainLayout';
+
 export default function HomePage() {
-  return null;
+  return (
+    <MainLayout>
+      {null}
+    </MainLayout>
+  );
 }
