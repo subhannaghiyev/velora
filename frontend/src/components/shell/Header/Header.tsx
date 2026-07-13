@@ -12,7 +12,7 @@ import ShoppingBagOutlined from '@mui/icons-material/ShoppingBagOutlined';
 import MenuRounded from '@mui/icons-material/MenuRounded';
 import Link from 'next/link';
 import { useScrollManager } from '@/lib/scroll';
-import { lightTokens, duration, easing } from '@/theme';
+import { lightTokens, duration, easing, shadowTokens, rawColors } from '@/theme';
 import { MobileDrawer } from './MobileDrawer';
 
 export const NAV_LINKS = [
@@ -57,18 +57,38 @@ export function Header({ transparentOnTop = true, solidOnScroll = true }: Header
 
   const isSolid = !transparentOnTop || (solidOnScroll && !isAtTop);
 
+  // rawColors.neutral[100] = #F5F4F2 — paper background at 95% opacity for scroll state.
+  // Used only on hero pages (transparentOnTop=true) to allow subtle depth without glassmorphism.
+  const bgColor = !isSolid
+    ? 'transparent'
+    : transparentOnTop
+      ? 'rgba(245, 244, 242, 0.95)'
+      : rawColors.neutral[100];
+
+  const transitionDuration = duration.moderate; // 300ms
+  const transitionProps = [
+    `background-color ${transitionDuration}ms ${easing.standard}`,
+    `backdrop-filter ${transitionDuration}ms ${easing.standard}`,
+    `-webkit-backdrop-filter ${transitionDuration}ms ${easing.standard}`,
+    `box-shadow ${transitionDuration}ms ${easing.standard}`,
+    `border-color ${transitionDuration}ms ${easing.standard}`,
+  ].join(', ');
+
   return (
     <>
       <AppBar
         position="fixed"
         elevation={0}
         sx={{
-          bgcolor: isSolid ? 'background.paper' : 'transparent',
+          bgcolor: bgColor,
+          backdropFilter: isSolid && transparentOnTop ? 'blur(16px)' : 'blur(0px)',
+          WebkitBackdropFilter: isSolid && transparentOnTop ? 'blur(16px)' : 'blur(0px)',
           borderBottom: isSolid
             ? `1px solid ${lightTokens.border.subtle}`
             : '1px solid transparent',
+          boxShadow: isSolid ? shadowTokens.xs : 'none',
           color: 'text.primary',
-          transition: `background-color ${duration.normal}ms ${easing.standard}, border-color ${duration.normal}ms ${easing.standard}`,
+          transition: transitionProps,
         }}
       >
         <Toolbar

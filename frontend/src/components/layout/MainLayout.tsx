@@ -9,18 +9,29 @@ export interface MainLayoutProps {
   children: ReactNode;
   withTransition?: boolean;
   headerProps?: HeaderProps;
+  // When true: no spacer, header overlays content, transparent at top.
+  // Use for pages with a full-bleed hero. Default: false (solid header).
+  heroLayout?: boolean;
 }
 
 export function MainLayout({
   children,
   withTransition = true,
   headerProps,
+  heroLayout = false,
 }: MainLayoutProps) {
+  const resolvedHeaderProps: HeaderProps = {
+    transparentOnTop: heroLayout,
+    solidOnScroll: true,
+    ...headerProps,
+  };
+
   return (
     <>
-      <Header {...headerProps} />
-      {/* Spacer compensates for fixed AppBar height */}
-      <Box sx={{ height: { xs: 64, md: 72 } }} aria-hidden="true" />
+      <Header {...resolvedHeaderProps} />
+      {!heroLayout && (
+        <Box sx={{ height: { xs: 64, md: 72 } }} aria-hidden="true" />
+      )}
       <PageContainer>
         {withTransition ? <PageTransition>{children}</PageTransition> : children}
       </PageContainer>
