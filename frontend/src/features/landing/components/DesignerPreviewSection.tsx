@@ -3,6 +3,7 @@ import Typography from '@mui/material/Typography';
 import { Reveal } from '@/components/motion/Reveal';
 import { FadeIn } from '@/components/motion/FadeIn';
 import { rawColors } from '@/theme';
+import { MediaContainer, HeroPoster } from '@/features/landing/media';
 
 export function DesignerPreviewSection() {
   return (
@@ -73,62 +74,23 @@ export function DesignerPreviewSection() {
           </Box>
         </Reveal>
 
-        {/* Right — 3D placeholder */}
+        {/*
+         * Right — 3D Designer preview image.
+         * This slot will receive a HeroPoster of the 3D scene once Sprint 7 is built.
+         * Target: velora_ss26_3d-designer-preview_front_charcoal_v1.jpg
+         * Spec: dark studio environment, product in focus, subtle edge lighting.
+         */}
         <FadeIn delay={0.15} duration={0.9}>
-          <Box
-            aria-label="3D Designer experience placeholder — coming soon"
-            sx={{
-              aspectRatio: { xs: '4/3', lg: '16/10' },
-              borderRadius: '8px',
-              border: `1px solid ${rawColors.neutral[800]}`,
-              bgcolor: rawColors.neutral[900],
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: 2,
-              position: 'relative',
-              overflow: 'hidden',
-            }}
+          <MediaContainer
+            radius="8px"
+            sx={{ aspectRatio: { xs: '4/3', lg: '16/10' } }}
           >
-            {/* Placeholder content */}
-            <Box
-              sx={{
-                width: 48,
-                height: 48,
-                borderRadius: '50%',
-                border: `1px solid ${rawColors.neutral[700]}`,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-              aria-hidden="true"
-            >
-              <Box
-                component="span"
-                sx={{
-                  width: 18,
-                  height: 18,
-                  borderRadius: '2px',
-                  border: `1.5px solid ${rawColors.neutral[600]}`,
-                  display: 'block',
-                  transform: 'rotate(15deg)',
-                }}
-              />
-            </Box>
-            <Typography
-              component="p"
-              sx={{
-                fontSize: '0.6875rem',
-                fontWeight: 500,
-                letterSpacing: '0.18em',
-                textTransform: 'uppercase',
-                color: rawColors.neutral[600],
-              }}
-            >
-              3D Experience — Coming Soon
-            </Typography>
-          </Box>
+            <HeroPoster
+              alt="3D Designer experience — a preview of the Velora design studio"
+              sizes="(max-width: 1200px) 100vw, 55vw"
+              dark
+            />
+          </MediaContainer>
         </FadeIn>
       </Box>
     </Box>

@@ -2,7 +2,8 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import CardContent from '@mui/material/CardContent';
 import { Card } from '@/components/ui/Card';
-import { rawColors, lightTokens } from '@/theme';
+import { lightTokens } from '@/theme';
+import { MediaContainer, ProductImage } from '@/features/landing/media';
 
 export interface ProductCardData {
   id: string;
@@ -10,9 +11,10 @@ export interface ProductCardData {
   name: string;
   price: string;
   href: string;
+  src?: string;
 }
 
-export function ProductCard({ category, name, price, href }: ProductCardData) {
+export function ProductCard({ category, name, price, href, src }: ProductCardData) {
   return (
     <Box
       component="a"
@@ -28,51 +30,14 @@ export function ProductCard({ category, name, price, href }: ProductCardData) {
           bgcolor: 'background.paper',
         }}
       >
-        {/*
-         * Image slot — 3:4 aspect ratio (fashion standard).
-         * Future Sprint: replace with Next.js <Image fill alt={`${name} editorial photo`} />.
-         */}
-        <Box
-          sx={{
-            aspectRatio: '3 / 4',
-            bgcolor: rawColors.neutral[50],
-            border: `1px solid ${rawColors.neutral[200]}`,
-            borderBottom: 'none',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: 1.5,
-          }}
-          aria-hidden="true"
-        >
-          <Typography
-            component="span"
-            sx={{
-              fontSize: '0.5625rem',
-              fontWeight: 600,
-              letterSpacing: '0.22em',
-              textTransform: 'uppercase',
-              color: rawColors.neutral[400],
-            }}
-          >
-            Image
-          </Typography>
-          <Typography
-            component="span"
-            sx={{
-              fontSize: '0.625rem',
-              fontWeight: 400,
-              letterSpacing: '0.08em',
-              color: rawColors.neutral[400],
-              textAlign: 'center',
-              px: 3,
-              lineHeight: 1.5,
-            }}
-          >
-            Reserved for Editorial Campaign
-          </Typography>
-        </Box>
+        {/* Product image — 3:4 portrait (ART_DIRECTION §11) */}
+        <MediaContainer sx={{ aspectRatio: '3 / 4' }}>
+          <ProductImage
+            src={src}
+            alt={`${name} — editorial product photo`}
+            sizes="(max-width: 900px) 50vw, 25vw"
+          />
+        </MediaContainer>
 
         <CardContent sx={{ pt: 3 }}>
           <Typography
@@ -102,10 +67,7 @@ export function ProductCard({ category, name, price, href }: ProductCardData) {
           </Typography>
           <Typography
             component="p"
-            sx={{
-              fontSize: '0.875rem',
-              color: 'text.secondary',
-            }}
+            sx={{ fontSize: '0.875rem', color: 'text.secondary' }}
           >
             {price}
           </Typography>

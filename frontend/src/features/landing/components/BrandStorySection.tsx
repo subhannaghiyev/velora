@@ -3,6 +3,7 @@ import Typography from '@mui/material/Typography';
 import { Reveal } from '@/components/motion/Reveal';
 import { SlideUp } from '@/components/motion/SlideUp';
 import { rawColors } from '@/theme';
+import { MediaContainer, CampaignImage } from '@/features/landing/media';
 
 export function BrandStorySection() {
   return (
@@ -34,7 +35,7 @@ export function BrandStorySection() {
         </Typography>
       </Reveal>
 
-      {/* Asymmetric editorial layout */}
+      {/* Asymmetric editorial layout — headline left, copy right */}
       <Box
         sx={{
           display: 'grid',
@@ -43,7 +44,6 @@ export function BrandStorySection() {
           alignItems: 'end',
         }}
       >
-        {/* Left — editorial headline */}
         <SlideUp delay={0.1} distance={32}>
           <Typography
             component="h2"
@@ -68,7 +68,6 @@ export function BrandStorySection() {
           </Typography>
         </SlideUp>
 
-        {/* Right — body copy */}
         <SlideUp delay={0.2} distance={24}>
           <Box sx={{ pt: { md: 2 } }}>
             <Typography
@@ -91,6 +90,24 @@ export function BrandStorySection() {
           </Box>
         </SlideUp>
       </Box>
+
+      {/*
+       * Editorial campaign image — ultra-wide cinema format (21:9).
+       * ART_DIRECTION §6: close-up fabric or construction detail shot.
+       * Target: velora_ss26_brand-story_detail-fabric_natural_v1.jpg
+       * Higgsfield spec: 85-135mm, f/2.8, directional side light, neutral bg.
+       */}
+      <Reveal delay={0.15} margin="-32px">
+        <MediaContainer
+          radius={0}
+          sx={{ aspectRatio: '21/9', mt: { xs: 10, md: 16 } }}
+        >
+          <CampaignImage
+            alt="Velora brand story — fabric close-up"
+            sizes="(max-width: 900px) 100vw, 1200px"
+          />
+        </MediaContainer>
+      </Reveal>
     </Box>
   );
 }

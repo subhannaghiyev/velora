@@ -11,6 +11,7 @@ const FEATURED_PRODUCTS: ProductCardData[] = [
     name: 'Tailored Linen Jacket',
     price: '$420',
     href: '/shop/tailored-linen-jacket',
+    src: '/images/products/velora_ss26_linen-jacket_front_natural_v1.webp',
   },
   {
     id: '02',
