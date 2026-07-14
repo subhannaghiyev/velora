@@ -19,10 +19,10 @@ import { MobileDrawer } from './MobileDrawer';
 export const NAV_LINKS = [
   { label: 'Shop',         href: '/shop' },
   { label: 'New Arrivals', href: '/#new-arrivals' },
-  { label: 'Collection',   href: '/collections' },
-  { label: 'Designer',     href: '/designer' },
-  { label: 'About',        href: '/about' },
-  { label: 'Contact',      href: '/contact' },
+  { label: 'Collection',   href: '/#collection' },
+  { label: 'Designer',     href: '/#designer' },
+  { label: 'About',        href: '/#about' },
+  { label: 'Contact',      href: '/#contact' },
 ];
 
 export interface HeaderProps {
@@ -53,9 +53,9 @@ const ACTION_ICON_SX = {
 };
 
 function isNavLinkActive(href: string, pathname: string): boolean {
-  const path = href.includes('#') ? href.split('#')[0] || '/' : href;
-  if (path === '/') return pathname === '/';
-  return pathname === path || pathname.startsWith(path + '/');
+  if (href.includes('#')) return false;
+  if (href === '/') return pathname === '/';
+  return pathname === href || pathname.startsWith(href + '/');
 }
 
 export function Header({ transparentOnTop = true, solidOnScroll = true }: HeaderProps) {

@@ -9,6 +9,7 @@ export function DesignerPreviewSection() {
   return (
     <Box
       component="section"
+      id="designer"
       aria-labelledby="designer-preview-heading"
       sx={{
         bgcolor: rawColors.neutral[950],

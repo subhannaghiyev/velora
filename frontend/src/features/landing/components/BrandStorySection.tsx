@@ -9,6 +9,7 @@ export function BrandStorySection() {
   return (
     <Box
       component="section"
+      id="about"
       aria-labelledby="brand-story-heading"
       sx={{
         py: { xs: 18, md: 28, lg: 36 },
