@@ -31,16 +31,23 @@ export {
   SHOP_SORT_DISPLAY,
 } from './constants/shop.constants';
 
+export type {
+  ShopChipCategoryId,
+  ShopSortDisplay,
+} from './constants/shop.constants';
+
 export {
   filterProducts,
   searchProducts,
   sortProducts,
   paginateProducts,
+  parseShopParams,
+  buildShopParams,
+  SORT_TO_URL,
 } from './utils';
 
-export type {
-  ShopChipCategoryId,
-  ShopSortDisplay,
-} from './constants/shop.constants';
+export type { PaginateResult, ShopParams } from './utils';
+
+export { useShopQueryState } from './hooks';
 
 export { SS26_PRODUCTS } from './data/mock.data';

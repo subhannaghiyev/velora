@@ -1,1 +1,1 @@
-export {};
+export { useShopQueryState } from './useShopQueryState';

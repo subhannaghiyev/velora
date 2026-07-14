@@ -1,5 +1,7 @@
+import { Suspense } from 'react';
 import Box from '@mui/material/Box';
 import { ShopProductView } from './ShopProductView';
+import { ProductGridSkeleton } from './ProductGridSkeleton';
 import type { Product } from '../types';
 
 export interface ShopGridProps {
@@ -19,7 +21,9 @@ export function ShopGrid({ products, isLoading = false }: ShopGridProps) {
         mx: 'auto',
       }}
     >
-      <ShopProductView products={products} isLoading={isLoading} />
+      <Suspense fallback={<ProductGridSkeleton />}>
+        <ShopProductView products={products} isLoading={isLoading} />
+      </Suspense>
     </Box>
   );
 }
