@@ -41,3 +41,26 @@ export const DEFAULT_FILTER: ProductFilter = {
 };
 
 export const SHOP_PAGE_SIZE = 12;
+
+export const SHOP_PRODUCTS_PER_PAGE = 8;
+
+export const SHOP_CHIP_CATEGORIES = [
+  { id: 'all',       label: 'All' },
+  { id: 'outerwear', label: 'Outerwear' },
+  { id: 'knitwear',  label: 'Knitwear' },
+  { id: 'tops',      label: 'Shirts' },
+  { id: 'bottoms',   label: 'Trousers' },
+] as const;
+
+export type ShopChipCategoryId = (typeof SHOP_CHIP_CATEGORIES)[number]['id'];
+
+export const SHOP_SORT_DISPLAY = [
+  'Featured',
+  'Newest',
+  'Price: low to high',
+  'Price: high to low',
+  'Name: A → Z',
+  'Name: Z → A',
+] as const;
+
+export type ShopSortDisplay = (typeof SHOP_SORT_DISPLAY)[number];
