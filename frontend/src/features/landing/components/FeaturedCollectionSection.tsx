@@ -40,6 +40,7 @@ export function FeaturedCollectionSection() {
   return (
     <Box
       component="section"
+      id="new-arrivals"
       aria-labelledby="featured-collection-heading"
       sx={{
         py: { xs: 16, md: 24, lg: 32 },

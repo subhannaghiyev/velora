@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import CloseRounded from '@mui/icons-material/CloseRounded';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { rawColors, duration, easing } from '@/theme';
 
 interface NavLink {
@@ -21,6 +22,11 @@ export interface MobileDrawerProps {
 }
 
 export function MobileDrawer({ open, onClose, navLinks }: MobileDrawerProps) {
+  const pathname = usePathname();
+
+  const isActive = (href: string) =>
+    href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(href + '/');
+
   return (
     <Drawer
       anchor="right"
@@ -72,32 +78,36 @@ export function MobileDrawer({ open, onClose, navLinks }: MobileDrawerProps) {
           aria-label="Mobile navigation"
           sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}
         >
-          {navLinks.map(({ label, href }) => (
-            <Box
-              key={href}
-              component={Link}
-              href={href}
-              onClick={onClose}
-              sx={{
-                display: 'block',
-                py: 1.5,
-                fontSize: '1.125rem',
-                fontWeight: 400,
-                letterSpacing: '-0.01em',
-                color: 'text.secondary',
-                textDecoration: 'none',
-                transition: `color ${duration.fast}ms ${easing.standard}`,
-                '&:hover': { color: 'text.primary' },
-                '&:focus-visible': {
-                  outline: `2px solid ${rawColors.gold[400]}`,
-                  outlineOffset: 3,
-                  borderRadius: 1,
-                },
-              }}
-            >
-              {label}
-            </Box>
-          ))}
+          {navLinks.map(({ label, href }) => {
+            const active = isActive(href);
+            return (
+              <Box
+                key={href}
+                component={Link}
+                href={href}
+                onClick={onClose}
+                aria-current={active ? 'page' : undefined}
+                sx={{
+                  display: 'block',
+                  py: 1.5,
+                  fontSize: '1.125rem',
+                  fontWeight: 400,
+                  letterSpacing: '-0.01em',
+                  color: active ? 'text.primary' : 'text.secondary',
+                  textDecoration: 'none',
+                  transition: `color ${duration.fast}ms ${easing.standard}`,
+                  '&:hover': { color: 'text.primary' },
+                  '&:focus-visible': {
+                    outline: `2px solid ${rawColors.gold[400]}`,
+                    outlineOffset: 3,
+                    borderRadius: 1,
+                  },
+                }}
+              >
+                {label}
+              </Box>
+            );
+          })}
         </Box>
       </Box>
     </Drawer>

@@ -11,17 +11,18 @@ import PersonOutlineOutlined from '@mui/icons-material/PersonOutlineOutlined';
 import ShoppingBagOutlined from '@mui/icons-material/ShoppingBagOutlined';
 import MenuRounded from '@mui/icons-material/MenuRounded';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useScrollManager } from '@/lib/scroll';
 import { lightTokens, duration, easing, shadowTokens, rawColors } from '@/theme';
 import { MobileDrawer } from './MobileDrawer';
 
 export const NAV_LINKS = [
-  { label: 'Home', href: '/' },
-  { label: 'New Arrivals', href: '/new-arrivals' },
-  { label: 'Collections', href: '/collections' },
-  { label: 'Designer', href: '/designer' },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Shop',         href: '/shop' },
+  { label: 'New Arrivals', href: '/#new-arrivals' },
+  { label: 'Collection',   href: '/collections' },
+  { label: 'Designer',     href: '/designer' },
+  { label: 'About',        href: '/about' },
+  { label: 'Contact',      href: '/contact' },
 ];
 
 export interface HeaderProps {
@@ -51,9 +52,16 @@ const ACTION_ICON_SX = {
   transition: `color ${duration.fast}ms ${easing.standard}`,
 };
 
+function isNavLinkActive(href: string, pathname: string): boolean {
+  const path = href.includes('#') ? href.split('#')[0] || '/' : href;
+  if (path === '/') return pathname === '/';
+  return pathname === path || pathname.startsWith(path + '/');
+}
+
 export function Header({ transparentOnTop = true, solidOnScroll = true }: HeaderProps) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const { isAtTop } = useScrollManager();
+  const pathname = usePathname();
 
   const isSolid = !transparentOnTop || (solidOnScroll && !isAtTop);
 
@@ -134,11 +142,23 @@ export function Header({ transparentOnTop = true, solidOnScroll = true }: Header
               justifyContent: 'center',
             }}
           >
-            {NAV_LINKS.filter((l) => l.href !== '/').map(({ label, href }) => (
-              <Box key={href} component={Link} href={href} sx={NAV_LINK_SX}>
-                {label}
-              </Box>
-            ))}
+            {NAV_LINKS.map(({ label, href }) => {
+              const active = isNavLinkActive(href, pathname);
+              return (
+                <Box
+                  key={href}
+                  component={Link}
+                  href={href}
+                  aria-current={active ? 'page' : undefined}
+                  sx={[
+                    NAV_LINK_SX,
+                    active && { color: 'text.primary' },
+                  ]}
+                >
+                  {label}
+                </Box>
+              );
+            })}
           </Box>
 
           {/* Action icons */}
