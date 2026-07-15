@@ -12,3 +12,11 @@ export { ShopGrid } from './ShopGrid';
 export type { ShopGridProps } from './ShopGrid';
 export { ShopClosing } from './ShopClosing';
 export { EmptyState } from './EmptyState';
+
+export { ProductBreadcrumb } from './ProductBreadcrumb';
+export { ProductDetailsLayout } from './ProductDetailsLayout';
+export { ProductGallery } from './ProductGallery';
+export { ProductInformation } from './ProductInformation';
+export { ProductMeta } from './ProductMeta';
+export { ProductPrice } from './ProductPrice';
+export { ProductDescription } from './ProductDescription';

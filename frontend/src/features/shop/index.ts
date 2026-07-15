@@ -44,6 +44,7 @@ export {
   parseShopParams,
   buildShopParams,
   SORT_TO_URL,
+  getProductBySlug,
 } from './utils';
 
 export type { PaginateResult, ShopParams } from './utils';
